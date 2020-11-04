@@ -3,10 +3,15 @@ language: python
 python:
   - 3.8.5
 
+env:
+  global:
+    - PIPENV_VENV_IN_PROJECT=1
+    - PIPENV_IGNORE_VIRTUALENVS=1
+
 install:
-  - pip install -q pipenv codecov
-  - pipenv sync --dev
-  - pipenv contrib/env-sample .env
+  - pip install -q pipenv
+  - pipenv sync -d
+  - cp contrib/env-sample .env
 
 script:
   - pipenv run flake8 .
